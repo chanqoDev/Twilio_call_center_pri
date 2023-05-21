@@ -12,5 +12,10 @@
   }, 
   "scripts": {
     "start:dev": "nodemon server.js" 
+  },
+  "nodemonConfig": {
+    "env": {
+      "PORT" : 3001
+    }
   }
 }

@@ -1,8 +1,10 @@
-const phoneNumber = "-Your Phone Number-";
-const phoneNumberSid = "-Your Phone Number SID-";
+const {
+  phoneNumber,
+  phoneNumberSid,
+  tokenSid,
+  tokenSecret,
+  accountSid,
+  verify,
+} = require("./config");
 
-const tokenSid = "-Your TokenSID-";
-const tokenSecret = "-Your TokenSecret-";
-
-const accountSid = "-Your accountSID-";
-const verify = "-Your VerifSID-";
+console.log(phoneNumber);
