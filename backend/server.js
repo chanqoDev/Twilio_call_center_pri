@@ -4,8 +4,6 @@ const config = require("./config");
 
 const PORT = process.env.PORT || 8080;
 
-const MOBILE = config.MOBILE;
-
 // Middleware test: Logging middleware with time stamp
 app.use((req, res, next) => {
   console.log(`[${new Date().toISOString()}] ${req.method} ${req.url}`);
@@ -33,6 +31,3 @@ app.get("/verify", (req, res) => {
 app.listen(PORT, () => {
   console.log(`listening on port ${PORT}`);
 });
-
-// Access sensitive information from the config file
-console.log(MOBILE);
