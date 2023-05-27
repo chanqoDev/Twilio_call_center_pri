@@ -17,10 +17,11 @@
   },
   "nodemonConfig": {
     "env": {
-      "PORT": 3001,
-      "MOBILE":  "-Your Phone Number-",
-      "TWILIO_ACCOUNT_SID":  "-Your accountSID-",
-      "TWILIO_AUTH_TOKEN":  "-Your TokenSID-"
+      "PORT": 3000,
+      "MOBILE_CELL": "to phone number ",
+      "MOBILE": "-Your Phone Number-",
+      "TWILIO_ACCOUNT_SID": "-Your accountSID-",
+      "TWILIO_AUTH_TOKEN":  "-Your TokenSecret-"
     }
   }
 }

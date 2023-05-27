@@ -9,13 +9,12 @@ class Twilio {
   tokenSid = config.tokenSid;
   verify = config.verify;
 
-  client = require("twilio")(accountSid, authToken);
-
-  constructor() {
-    // this.client = twilio(this.tokenSid, this.authToken, {
-    //   accountSid: this.accountSid,
-    // });
+  constructor(accountSid, authToken) {
+    this.accountSid = accountSid;
+    this.authToken = authToken;
+    this.client = require("twilio")(this.accountSid, this.authToken);
   }
+
   getTwilio() {
     this.client;
   }
@@ -23,9 +22,16 @@ class Twilio {
   async sendVerify(to, channel) {
     const data = await this.client.verify.v2
       .services(this.verify)
-      .verifications.create({ to: "to Phone number", channel: "sms" })
-      .then((verification) => console.log(verification.sid));
+      .verifications.create({ to: process.env.MOBILE_CELL, channel: "sms" });
     console.log("sendVerify", data);
+    return data;
+  }
+
+  async verifyCodeAsync(to, code) {
+    const data = await this.client.verify.v2
+      .services(this.verify)
+      .verificationChecks.create({ to: process.env.MOBILE_CELL, code: code });
+    console.log("verifyCode", data);
     return data;
   }
 }
