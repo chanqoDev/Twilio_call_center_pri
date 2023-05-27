@@ -20,8 +20,10 @@ const socketIo = require("socket.io");
 const app = express();
 app.use(cors());
 var server = http.createServer(app);
-// const socket = io(server);
 var socket = socketIo(server);
+
+app.use(bodyParser.json());
+const PORT = process.env.PORT || 8080;
 
 socket.on("connection", (socket) => {
   console.log("Socket connected", socket);
@@ -31,29 +33,27 @@ socket.on("disconnect", (socket) => {
   console.log("Socket disconnected", socket);
 });
 
-app.use(bodyParser.json());
-
-const PORT = process.env.PORT || 8080;
-
 app.get("/test", (req, res) => {
   res.send("<h1>howdy Twilio</h1>");
 });
 
 app.get("/login", async (req, res) => {
   const { to, username, channel } = req.body;
-
-  const data = await twilio.sendVerify(to, channel);
+  console.log("login in... ");
+  const data = await twilio.sendVerify(process.env.MOBILE_CELL, channel);
   res.send(data);
   console.log(data);
 });
 
-app.get("/verfiy", async (req, res) => {
+app.get("/verify", async (req, res) => {
   console.log("verifing code");
-  const { to, code } = req.body;
-  const data = await twilio.verifyCodeAsync(to, code);
-  res.send(data);
+  // const { to, code } = req.body;
+  const data = await twilio.verifyCodeAsync(
+    process.env.MOBILE_CELL,
+    req.query.code
+  );
+  return data;
 });
-// console.log(process.env.MOBILE);
 
 app.listen(PORT, () => {
   console.log(`listening on port: ${PORT}`);
