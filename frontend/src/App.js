@@ -1,9 +1,14 @@
 import Login from "./components/Login";
+import { useImmer } from "use-immer";
 
 function App() {
+  const [user, setUser] = useImmer({
+    username: "",
+    mobileNumber: "",
+  });
   return (
     <div>
-      <Login />
+      <Login user={user} setUser={setUser} />
     </div>
   );
 }
